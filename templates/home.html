@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DisastraSense – AI Disaster Prediction & Response</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; overflow: hidden; }
+    body {
+      height: 100vh;
+      min-height: 100%;
+      margin: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(165deg, #e8f4fc 0%, #f0f7ff 35%, #ffffff 70%);
+      color: #1a1d29;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Abstract background shapes */
+    .bg-shapes {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bg-shapes .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+    .bg-shapes .shape-1 {
+      width: 600px; height: 600px;
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+      top: -200px; right: -150px;
+    }
+    .bg-shapes .shape-2 {
+      width: 400px; height: 400px;
+      background: linear-gradient(180deg, #0ea5e9 0%, #38bdf8 100%);
+      bottom: 10%; right: 5%;
+    }
+    .bg-shapes .shape-3 {
+      width: 300px; height: 300px;
+      background: #3b82f6;
+      top: 50%; left: -80px;
+    }
+    .bg-shapes .wave {
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230ea5e9' fill-opacity='0.06' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,165.3C960,171,1056,149,1152,138.7C1248,128,1344,128,1392,128L1440,128L1440,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+      background-size: cover;
+      bottom: 0;
+      left: 0;
+      opacity: 0.9;
+    }
+
+    .wrap { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: auto; }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      flex-shrink: 0;
+    }
+    .logo-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0c7ab3;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    /* Main layout: hero left, cards right */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px 32px;
+      gap: 32px;
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 0;
+    }
+    .hero-content {
+      flex: 1;
+      max-width: 480px;
+    }
+    .hero-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #1a1d29;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .hero-desc {
+      font-size: 0.9375rem;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      max-width: 420px;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e3a5f;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 10px 24px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-cta:hover { background: #0f2744; transform: translateY(-1px); }
+
+    /* Right cards */
+    .hero-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+      width: 260px;
+    }
+    .card-metric {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(0,0,0,0.04);
+      padding: 18px 20px;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .card-metric .icon-wrap {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      border-radius: 10px;
+    }
+    .card-metric .icon-wrap svg { width: 22px; height: 22px; color: #fff; }
+    .card-metric .value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1d29;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .card-metric .label {
+      font-size: 0.8125rem;
+      color: #475569;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .card-metric .progress {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-metric .progress-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      flex: 1;
+      overflow: hidden;
+    }
+    .card-metric .progress-fill {
+      height: 100%;
+      width: 70%;
+      background: linear-gradient(90deg, #2563eb, #0ea5e9);
+      border-radius: 999px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-section { flex-direction: column; text-align: center; }
+      .hero-content { max-width: 100%; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-cards { width: 100%; max-width: 360px; margin: 0 auto; }
+      .header { padding: 16px 24px; }
+    }
+    @media (max-width: 768px) {
+      .hero-section { padding: 32px 24px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="wave"></div>
+  </div>
+
+  <div class="wrap">
+    <header class="header">
+      <a href="/" class="logo-pill">DisastraSense</a>
+    </header>
+
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Smart Disaster Prediction</h1>
+        <p class="hero-desc">DisastraSense is the turnkey AI solution for predicting floods, earthquakes, and hurricanes—and guiding response with a safety chatbot and victim detection.</p>
+        <a href="/app" class="btn-cta">GET STARTED</a>
+      </div>
+      <div class="hero-cards">
+        <div class="card-metric">
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg>
+          </div>
+          <div class="value">85%</div>
+          <div class="label">Faster response with AI prediction</div>
+          <div class="progress">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
