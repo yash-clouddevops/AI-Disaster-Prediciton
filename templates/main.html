@@ -24,6 +24,7 @@
     body.dark .navbar .brand { color: var(--accent); }
     .navbar .right { display: flex; gap: 12px; align-items: center; }
     .navbar .tabs select { background: var(--input-bg); color: var(--text); border: 1px solid var(--input-border); border-radius: 10px; padding: 8px 12px; font-size: 0.875rem; cursor: pointer; min-width: 180px; font-family: inherit; }
+    body.dark .navbar .tabs select { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
     .navbar .tabs select:focus { outline: none; border-color: var(--accent); }
     .theme-btn { background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text); border-radius: 10px; padding: 8px 12px; font-size: 0.8rem; cursor: pointer; font-family: inherit; }
     .theme-btn:hover { border-color: var(--accent); }
@@ -48,9 +49,20 @@
     body.light .field label { color: #334155; }
     .field input, .field select { background: var(--input-bg); color: var(--text); border: 2px solid var(--input-border); border-radius: 8px; padding: 8px 10px; font-size: 0.875rem; font-family: inherit; }
     body.light .field input, body.light .field select { border-color: #cbd5e1; background: #fff; }
-    body.dark .field input, body.dark .field select { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-    .field input::placeholder { color: #94a3b8; }
+    body.dark .field input, body.dark .field select { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+    body.dark .field input:focus, body.dark .field select:focus { background: #1e293b !important; color: #e2e8f0 !important; }
+    body.dark .field input::-webkit-input-placeholder { color: #64748b; }
     body.dark .field input::placeholder { color: #64748b; }
+    body.dark .field input:-webkit-autofill,
+    body.dark .field input:-webkit-autofill:hover,
+    body.dark .field input:-webkit-autofill:focus,
+    body.dark .field input:-webkit-autofill:active {
+      -webkit-text-fill-color: #e2e8f0 !important;
+      -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+      box-shadow: 0 0 0 30px #1e293b inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+    .field input::placeholder { color: #94a3b8; }
     .field input:focus, .field select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(14,165,233,0.15); }
     body.light .field input:focus, body.light .field select:focus { border-color: #0c7ab3; }
     body.dark .field input:focus, body.dark .field select:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56,189,248,0.2); }
@@ -78,6 +90,15 @@
     .chat-msg.bot { background: var(--input-bg); border: 1px solid var(--border); align-self: flex-start; }
     .chat-input-row { display: flex; gap: 8px; }
     .chat-input-row input { flex: 1; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 0.875rem; font-family: inherit; }
+    body.dark .chat-input-row input { background: #1e293b !important; color: #e2e8f0 !important; border-color: #475569 !important; }
+    body.dark .chat-input-row input:-webkit-autofill,
+    body.dark .chat-input-row input:-webkit-autofill:hover,
+    body.dark .chat-input-row input:-webkit-autofill:focus,
+    body.dark .chat-input-row input:-webkit-autofill:active {
+      -webkit-text-fill-color: #e2e8f0 !important;
+      -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+      box-shadow: 0 0 0 30px #1e293b inset !important;
+    }
     .chat-input-row input:focus { outline: none; border-color: var(--accent); }
     .yolo-panel { display: flex; flex-direction: column; gap: 12px; }
     .yolo-upload { border: 2px dashed var(--border); border-radius: 10px; padding: 16px; text-align: center; background: var(--card); color: var(--muted); font-size: 0.875rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }

@@ -1,6 +1,4 @@
 # AI-Based-Disaster-Prediction-and-Response-System-
-![image](https://github.com/user-attachments/assets/23a3bc7a-fc18-4cfa-b570-344a286f169d)
-
 
 Overview
 
@@ -11,31 +9,17 @@ Predictive Models for Natural Disasters:
 
 1.Flood Prediction Model: Analyzes historical weather patterns, river levels, and precipitation data to forecast potential flooding events.
 
-![Screenshot 2025-05-28 123053](https://github.com/user-attachments/assets/4953b177-b20e-430e-a3e4-1ddd5ca7cbd3)
-
-
-
 2.Earthquake Prediction Model: Utilizes seismic activity and geological data to predict earthquake occurrences and their potential impacts.
 
-![Screenshot 2024-07-24 114757](https://github.com/user-attachments/assets/bbe4fd0a-c724-4aa3-8505-ede55302aaac)
-
-
 3.Hurricane Prediction Model: Uses atmospheric data, ocean temperatures, and historical storm patterns to predict hurricane formations and trajectories.
-![Screenshot 2024-07-24 114849](https://github.com/user-attachments/assets/46f18315-8708-47b6-a59f-b8cb50114b1a)
-
 
 Chatbase API Integration:
 
 Integrated with Chatbase API to offer an interactive chat-based interface. Users can receive real-time responses and information related to flood scenarios and safety measures.
 
-![Screenshot 2024-07-24 114905](https://github.com/user-attachments/assets/fce1185b-6016-47c4-be24-04040dc4b104)
-
-
 YOLOv5 Model for Post-Disaster Response:
 
 Deployed YOLOv5 (You Only Look Once) object detection model to analyze post-disaster imagery and videos. This model helps in locating and identifying victims, aiding in efficient rescue operations.
-
-![Screenshot 2024-07-24 114922](https://github.com/user-attachments/assets/8ad80c30-0a40-49bc-8ec0-2f94fb85e8a0)
 
 Input video- https://drive.google.com/file/d/1JavezBw-sL8aN0rA28tajhg9rKx9-IJC/view
 
