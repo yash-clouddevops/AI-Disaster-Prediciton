@@ -84,13 +84,13 @@
       letter-spacing: -0.02em;
       text-decoration: none;
     }
-    /* Main layout: hero left, cards right */
+    /* Main layout: hero left, image center, cards right */
     .hero-section {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 24px 32px 32px;
-      gap: 32px;
+      gap: 24px;
       flex: 1;
       max-width: 1200px;
       margin: 0 auto;
@@ -99,8 +99,51 @@
     }
     .hero-content {
       flex: 1;
-      max-width: 480px;
+      max-width: 420px;
     }
+    .hero-visual {
+      flex-shrink: 0;
+      width: 280px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 20px rgba(14, 165, 233, 0.15));
+    }
+    .disaster-types {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 20px 32px 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .disaster-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 28px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 14px;
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+      text-decoration: none;
+      color: #1a1d29;
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-width: 140px;
+    }
+    .disaster-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.15); }
+    .disaster-tile .tile-icon { width: 64px; height: 64px; flex-shrink: 0; }
+    .disaster-tile .tile-icon svg { width: 100%; height: 100%; }
+    .disaster-tile .tile-label { font-size: 0.9375rem; font-weight: 600; color: #0c7ab3; }
+    .disaster-tile .tile-desc { font-size: 0.75rem; color: #64748b; text-align: center; }
     .hero-title {
       font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       font-weight: 700;
@@ -195,11 +238,16 @@
       .hero-section { flex-direction: column; text-align: center; }
       .hero-content { max-width: 100%; }
       .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-visual { order: -1; width: 220px; height: 190px; margin: 0 auto; }
       .hero-cards { width: 100%; max-width: 360px; margin: 0 auto; }
       .header { padding: 16px 24px; }
     }
     @media (max-width: 768px) {
-      .hero-section { padding: 32px 24px 48px; }
+      .hero-section { padding: 24px 20px 32px; gap: 20px; }
+      .hero-visual { width: 200px; height: 170px; }
+      .disaster-types { padding: 16px 20px 24px; gap: 14px; }
+      .disaster-tile { padding: 16px 20px; min-width: 120px; }
+      .disaster-tile .tile-icon { width: 52px; height: 52px; }
     }
   </style>
 </head>
@@ -222,6 +270,27 @@
         <p class="hero-desc">DisastraSense is the turnkey AI solution for predicting floods, earthquakes, and hurricanes—and guiding response with a safety chatbot and victim detection.</p>
         <a href="/app" class="btn-cta">GET STARTED</a>
       </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="140" cy="100" r="70" fill="url(#heroGrad1)" opacity="0.9"/>
+          <circle cx="140" cy="100" r="50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+          <path d="M140 50v20M140 130v20M90 100h20M170 100h20M107 73l14 14M159 125l14 14M173 73l-14 14M121 125l-14 14" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M140 100l-25 25M140 100l25-25M140 100l25 25M140 100l-25-25" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+          <circle cx="140" cy="100" r="12" fill="#fff" opacity="0.95"/>
+          <path d="M60 200c0-44 35-80 80-80s80 36 80 80" stroke="url(#heroGrad2)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M50 215c0-50 40-90 90-90s90 40 90 90" stroke="url(#heroGrad3)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+          <path d="M100 165 Q140 155 180 165 Q200 175 180 195 Q140 205 100 195 Q80 185 100 165" fill="none" stroke="#0ea5e9" stroke-width="2.5" opacity="0.7"/>
+          <path d="M75 185 Q140 172 205 185" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="80" cy="85" r="8" fill="#38bdf8" opacity="0.7"/>
+          <circle cx="200" cy="75" r="6" fill="#7dd3fc" opacity="0.6"/>
+          <circle cx="180" cy="150" r="5" fill="#0ea5e9" opacity="0.5"/>
+          <defs>
+            <linearGradient id="heroGrad1" x1="70" y1="30" x2="210" y2="170" gradientUnits="userSpaceOnUse"><stop stop-color="#0c7ab3"/><stop offset="0.5" stop-color="#0ea5e9"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
+            <linearGradient id="heroGrad2" x1="60" y1="120" x2="220" y2="200" gradientUnits="userSpaceOnUse"><stop stop-color="#0ea5e9"/><stop offset="1" stop-color="#7dd3fc"/></linearGradient>
+            <linearGradient id="heroGrad3" x1="50" y1="125" x2="230" y2="215" gradientUnits="userSpaceOnUse"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#bae6fd"/></linearGradient>
+          </defs>
+        </svg>
+      </div>
       <div class="hero-cards">
         <div class="card-metric">
           <div class="icon-wrap">
@@ -234,6 +303,51 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="disaster-types" aria-label="Disaster types we predict">
+      <a href="/app" class="disaster-tile">
+        <div class="tile-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 12c-18 24-24 36-24 52 0 0 10 0 24 0s24 0 24 0c0-16-6-28-24-52z" fill="url(#floodTile)" opacity="0.95"/>
+            <path d="M20 48c0-12 12-24 12-24s12 12 12 24" stroke="#0ea5e9" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <path d="M14 56h36c0-8-18-16-36-16-18 0-36 8-36 16z" fill="url(#floodTile2)"/>
+            <circle cx="22" cy="28" r="4" fill="#38bdf8" opacity="0.7"/>
+            <circle cx="48" cy="24" r="3" fill="#7dd3fc" opacity="0.6"/>
+            <defs><linearGradient id="floodTile" x1="8" y1="12" x2="56" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#0c7ab3"/><stop offset="1" stop-color="#38bdf8"/></linearGradient><linearGradient id="floodTile2" x1="14" y1="40" x2="50" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#0284c7"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <span class="tile-label">Flood</span>
+        <span class="tile-desc">Risk prediction</span>
+      </a>
+      <a href="/app" class="disaster-tile">
+        <div class="tile-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="36" width="8" height="28" fill="#64748b" opacity="0.7"/>
+            <rect x="24" y="24" width="8" height="40" fill="#475569"/>
+            <rect x="36" y="16" width="8" height="48" fill="#334155"/>
+            <rect x="48" y="28" width="8" height="36" fill="#475569" opacity="0.8"/>
+            <path d="M16 32l8-4 6 8 10-12 8 10" stroke="#0ea5e9" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="36" cy="12" r="8" fill="#0c7ab3" opacity="0.85"/>
+          </svg>
+        </div>
+        <span class="tile-label">Earthquake</span>
+        <span class="tile-desc">Magnitude prediction</span>
+      </a>
+      <a href="/app" class="disaster-tile">
+        <div class="tile-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 14 Q18 32 32 50 Q46 32 32 14" stroke="#0ea5e9" stroke-width="2" fill="none" opacity="0.85"/>
+            <path d="M32 22 Q22 32 32 42 Q42 32 32 22" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.75"/>
+            <path d="M32 28 Q26 32 32 36 Q38 32 32 28" stroke="#7dd3fc" stroke-width="1" fill="none" opacity="0.6"/>
+            <circle cx="32" cy="32" r="14" fill="url(#hurTile)"/>
+            <circle cx="32" cy="32" r="5" fill="#fff" opacity="0.9"/>
+            <defs><linearGradient id="hurTile" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse"><stop stop-color="#0c7ab3"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
+          </svg>
+        </div>
+        <span class="tile-label">Hurricane</span>
+        <span class="tile-desc">Wind prediction</span>
+      </a>
     </section>
   </div>
 </body>

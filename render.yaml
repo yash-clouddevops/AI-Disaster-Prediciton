@@ -1,0 +1,14 @@
+# Render Blueprint - optional one-click deploy
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: disastrasense
+    runtime: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      # Add your Chatbase keys in Render Dashboard -> Environment:
+      # CHATBASE_API_KEY, CHATBASE_CHATBOT_ID
