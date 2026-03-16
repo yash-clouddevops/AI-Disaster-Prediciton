@@ -46,7 +46,7 @@ The app runs as a **Flask web application** with a single frontend (home page â†
 
 ```bash
 git clone https://github.com/ranjeet229/AI-Disaster-Prediciton.git
-cd AI-Based-Disaster-Prediction
+cd AI-Disaster-Predicton
 ```
 
 ### 2. Install dependencies
