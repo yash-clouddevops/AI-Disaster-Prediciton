@@ -10,5 +10,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      # Add your Chatbase keys in Render Dashboard -> Environment:
-      # CHATBASE_API_KEY, CHATBASE_CHATBOT_ID
